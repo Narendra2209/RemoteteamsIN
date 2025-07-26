@@ -1,0 +1,107 @@
+.upload-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f4f8fc;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+.upload-container p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.drop-area {
+  border: 2px dashed #0077cc;
+  border-radius: 10px;
+  padding: 30px;
+  background-color: #e8f4ff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.drop-area.dragging {
+  background-color: #cce7ff;
+}
+
+.icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+  color: #0077cc;
+}
+
+.browse-btn {
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.browse-btn:hover {
+  background-color: #005fa3;
+}
+
+.preview {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.preview img,
+.preview video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.preview input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 15px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+}
+
+.submit-btn {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 16px;
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:disabled {
+  background-color: #a4d4ae;
+  cursor: not-allowed;
+}
+
+.submit-btn:hover:enabled {
+  background-color: #218838;
+}
+
+.media-link {
+  margin-top: 25px;
+  word-break: break-word;
+  font-size: 15px;
+}
+
+.media-link a {
+  color: #0077cc;
+  text-decoration: underline;
+}
