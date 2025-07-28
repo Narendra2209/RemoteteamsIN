@@ -15,7 +15,7 @@ const ImageGeneration = () => {
     setLoading(true);
     setImages([]);
     setSelectedImage(null);
-    setResponseData(null); // Reset previous response
+    setResponseData(null);
 
     try {
       const webhookUrl =
@@ -33,21 +33,21 @@ const ImageGeneration = () => {
       console.log("Webhook response:", data);
 
       setResponseData(data);
-      
       setWebViewLink(data.webViewLink || null);
-
     } catch (error) {
       console.error("Error during webhook request:", error);
-      setResponseData({ error: error.message }); 
+      setResponseData({ error: error.message });
     } finally {
       setLoading(false);
     }
   };
 
   function convertDriveUrlToPreview(driveUrl) {
-  const match = driveUrl.match(/\/d\/(.+?)\//);
-  return match ? `https://drive.google.com/file/d/${match[1]}/preview` : driveUrl;
-}
+    const match = driveUrl.match(/\/d\/(.+?)\//);
+    return match
+      ? `https://drive.google.com/file/d/${match[1]}/preview`
+      : driveUrl;
+  }
 
   const handleSelect = (img) => {
     setSelectedImage(img);
@@ -93,17 +93,44 @@ const ImageGeneration = () => {
   return (
     <div className="image-generation-container">
       <h2>Generate Image</h2>
-      <input
-        type="text"
+
+      {/* ✅ Multiline textarea input */}
+      <textarea
         value={prompt}
         onChange={(e) => setPrompt(e.target.value)}
         placeholder="Enter your prompt"
         className="prompt-input"
+        rows={5}
+        style={{
+          width: "100%",
+          padding: "10px",
+          fontSize: "16px",
+          borderRadius: "8px",
+          border: "1px solid #ccc",
+          resize: "vertical",
+          fontFamily: "inherit",
+        }}
       />
+
       <br />
       <button onClick={handleGenerate} className="generate-button">
         Generate Image
       </button>
+
+      {prompt.trim() && (
+        <div
+          style={{
+            marginTop: "20px",
+            background: "#f9f9f9",
+            padding: "10px",
+            borderRadius: "8px",
+            whiteSpace: "pre-wrap",
+          }}
+        >
+          {/* <strong>Prompt Preview:</strong>
+          <p>{prompt}</p> */}
+        </div>
+      )}
 
       {loading && <p>Generating image...</p>}
 
@@ -124,37 +151,22 @@ const ImageGeneration = () => {
         </div>
       )}
 
-      {responseData && (
-        <div style={{ marginTop: "30px", textAlign: "left" }}>
-          <strong>Generated Image</strong>
-          <pre
+      {responseData && webViewLink && (
+        <div style={{ marginTop: "30px", textAlign: "center" }}>
+          <strong>Generated Image:</strong>
+          <iframe
+            src={convertDriveUrlToPreview(webViewLink)}
+            width="320"
+            height="240"
             style={{
-              background: "#f4f4f4",
-              padding: "12px",
-              borderRadius: "8px",
-              maxWidth: "90%",
-              overflowX: "auto",
+              border: "none",
+              borderRadius: "12px",
+              display: "block",
               margin: "12px auto",
-              whiteSpace: "pre-wrap",
-              wordWrap: "break-word",
-              fontSize: "14px",
-              lineHeight: "1.5",
             }}
-          >
-            <iframe
-      src={convertDriveUrlToPreview(webViewLink)}
-      width="320"
-      height="240"
-      style={{
-        border: "none",
-        borderRadius: "12px",
-        display: "block",
-        margin: "0 auto"
-      }}
-      allow="autoplay"
-    />
-            {/* {JSON.stringify(responseData, null, 2)} */}
-          </pre>
+            allow="autoplay"
+            title="Generated Image Preview"
+          />
         </div>
       )}
     </div>
